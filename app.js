@@ -64,6 +64,7 @@ function renderThreeRandomImages(){
     while(leftImageIndex === rightImageIndex || leftImageIndex===middleImageIndex || middleImageIndex===rightImageIndex || previouslyShownImages.includes(leftImageIndex) || previouslyShownImages.includes(middleImageIndex) || previouslyShownImages.includes(rightImageIndex)){
         leftImageIndex = generateRandomIndex(); 
         rightImageIndex= generateRandomIndex();
+        middleImageIndex=generateRandomIndex();
     }
     
 
