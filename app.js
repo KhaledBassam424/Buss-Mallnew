@@ -12,6 +12,7 @@ let rightImageElementPrevious=-1
 let leftImageElement = document.getElementById('leftImage');
 let middleImageElement=document.getElementById('middleImage')
 let rightImageElement = document.getElementById('rightImage');
+let previouslyShownImages=[];
 
 let arrOfObjects = [];
 function Products(name, source){
@@ -60,18 +61,26 @@ function renderThreeRandomImages(){
 
     
    
-    while(leftImageIndex === rightImageIndex || leftImageIndex===middleImageIndex || middleImageIndex===rightImageIndex ){
+    while(leftImageIndex === rightImageIndex || leftImageIndex===middleImageIndex || middleImageIndex===rightImageIndex || previouslyShownImages.includes(leftImageIndex) || previouslyShownImages.includes(middleImageIndex) || previouslyShownImages.includes(rightImageIndex)){
         leftImageIndex = generateRandomIndex(); 
         rightImageIndex= generateRandomIndex();
     }
-                                                  
+    
+
+
+
+    previouslyShownImages[0]=leftImageIndex;
+    previouslyShownImages[1]=middleImageIndex;
+    previouslyShownImages[2]=rightImageIndex;
+    
+
     leftImageElement.setAttribute('src', arrOfObjects[leftImageIndex].source); 
     middleImageElement.setAttribute('src', arrOfObjects[middleImageIndex].source );
     rightImageElement.setAttribute('src', arrOfObjects[rightImageIndex].source);
-
+    
 }                                       
 
-renderThreeRandomImages();
+ renderThreeRandomImages();
 
 
 
@@ -112,7 +121,7 @@ function handleClicking(event){
         
         renderThreeRandomImages();
 
-        console.log(arrOfObjects);
+        // console.log(arrOfObjects);
     }else{
 
         
@@ -122,9 +131,7 @@ function handleClicking(event){
 
             
         }
-        //console.log(numberOfVotesArray)
-        //console.log(numberOfShownArray)
-        //console.log(nameArray)
+        
         leftImageElement.removeEventListener('click', handleClicking);
         rightImageElement.removeEventListener('click', handleClicking);    
         middleImageElement.removeEventListener('click', handleClicking);
@@ -150,6 +157,7 @@ if(attempts >= 25){
         console.log(li.textContent)
 
 }
+savedVotesResults();
 chartRender();
 button.removeEventListener('click', displaylist);     
 }
@@ -184,3 +192,25 @@ function chartRender(){
     
    
 }
+
+function savedVotesResults(){
+    let votesNumber = JSON.stringify(arrOfObjects);
+    localStorage.setItem('AllVotes', votesNumber);
+  }
+
+  function getOrder(){
+    let gettingVotesNumber = localStorage.getItem('AllVotes')
+    let inthGetting = JSON.parse(gettingVotesNumber)
+    if(inthGetting){ 
+        arrOfObjects = inthGetting;
+        displaylist();
+      }
+
+    // let list=JSON.parse(gettingVotesNumber);
+    
+    // console.log(gettingVotesNumber)
+    
+    // console.log(gettingVotesNumber)
+  
+  }
+  getOrder();
