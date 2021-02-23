@@ -1,0 +1,57 @@
+
+*{
+    box-sizing: border-box;
+}
+body {
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(87, 46, 95));
+}
+header h1 {
+    position: relative;
+    margin-top: 0%;
+    font-size: 60px ;
+    
+/* background: rgb(75, 2, 2); */
+left: 300px;
+color: rgb(255, 255, 255);
+}
+header {
+    width: 100%;
+    background: rgb(66, 66, 66);
+    margin-left: 0%;
+}
+#container {
+    position: relative;
+width: 75%;
+left: 200px;
+border: gold;
+margin-top: 50px;
+}
+#leftImage {
+    width : 300px;
+    height: 300px;
+    /* float :left */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 3px solid rgb(75, 1, 1);
+    background: rgb(255, 172, 172);
+    margin: auto;
+    padding: 15px 10px;
+}
+#middleImage {
+    width : 300px;
+    height: 300px;
+    /* float :right */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 3px solid rgb(75, 1, 1);
+    background: rgb(255, 172, 172);
+    margin: auto;
+    padding: 15px 10px;
+}
+#rightImage {
+    width : 300px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 3px solid rgb(75, 1, 1);
+    background: rgb(255, 172, 172);
+    margin: auto;
+    padding: 15px 10px;
+}
