@@ -3,7 +3,12 @@
 
 let maximumClicks = 25;
 let attempts = 0;
-
+let nameArray=[];
+let numberOfVotesArray=[];
+let numberOfShownArray=[];
+let leftImageElementPrevious=-1
+let middleImageElementPrevious= -1
+let rightImageElementPrevious=-1
 let leftImageElement = document.getElementById('leftImage');
 let middleImageElement=document.getElementById('middleImage')
 let rightImageElement = document.getElementById('rightImage');
@@ -14,6 +19,8 @@ function Products(name, source){
     this.source = source;
     this.votes = 0;
     this.shown =0;
+    nameArray.push(this.name)
+   
    
     arrOfObjects.push(this);
 }
@@ -41,6 +48,10 @@ new Products('wine-glass','images/wine-glass.jpg');
 let leftImageIndex;
 let middleImageIndex;
 let rightImageIndex;
+
+
+
+
 function renderThreeRandomImages(){
     leftImageIndex = generateRandomIndex(); 
     middleImageIndex=generateRandomIndex(); 
@@ -48,12 +59,11 @@ function renderThreeRandomImages(){
                                                                
 
     
+   
     while(leftImageIndex === rightImageIndex || leftImageIndex===middleImageIndex || middleImageIndex===rightImageIndex ){
         leftImageIndex = generateRandomIndex(); 
         rightImageIndex= generateRandomIndex();
     }
-
-
                                                   
     leftImageElement.setAttribute('src', arrOfObjects[leftImageIndex].source); 
     middleImageElement.setAttribute('src', arrOfObjects[middleImageIndex].source );
@@ -101,8 +111,20 @@ function handleClicking(event){
             // console.log(arrOfObjects[rightImageIndex].votes);
         
         renderThreeRandomImages();
+
         console.log(arrOfObjects);
     }else{
+
+        
+        for(let j = 0 ; j <arrOfObjects.length; j++){
+            numberOfVotesArray.push(arrOfObjects[j].votes);
+            numberOfShownArray.push(arrOfObjects[j].shown);
+
+            
+        }
+        //console.log(numberOfVotesArray)
+        //console.log(numberOfShownArray)
+        //console.log(nameArray)
         leftImageElement.removeEventListener('click', handleClicking);
         rightImageElement.removeEventListener('click', handleClicking);    
         middleImageElement.removeEventListener('click', handleClicking);
@@ -126,7 +148,39 @@ if(attempts >= 25){
         unorderdList.appendChild(li);
         li.textContent =  `${arrOfObjects[i].name} had ${arrOfObjects[i].votes} Votes and was displayed ${arrOfObjects[i].shown} times..`
         console.log(li.textContent)
+
 }
+chartRender();
 button.removeEventListener('click', displaylist);     
 }
+}
+
+
+function chartRender(){
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+       
+        type: 'bar',
+    
+       
+        data: {
+            labels: nameArray,
+            datasets: [{
+                label: 'numberOfVotes',
+                backgroundColor: '#e36bae',
+                borderColor: 'rgb(255, 99, 132)',
+                data: numberOfVotesArray,
+            },{
+                label: 'numberOfShowns',
+                backgroundColor: '#f1d1d0',
+                borderColor:'rgb(155,100,30)',
+                data:numberOfShownArray,
+    
+            }]
+        },
+    
+        options: {}
+    });
+    
+   
 }
